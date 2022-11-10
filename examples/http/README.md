@@ -9,7 +9,7 @@ to server. The example shows several aspects of tracing such as:
 * Using the `GlobalPropagator`
 * Span Attributes
 * Span Events
-* Using the GRPC exporter, sending to Honeycomb
+* Using the GRPC OLTP exporter, sending to Honeycomb
 * W3C Trace Context Propagation
 
 ### Running the example
@@ -22,6 +22,12 @@ to server. The example shows several aspects of tracing such as:
 
 2. Build and Deploy the opentelementry-cpp as described in
    [INSTALL.md](../../INSTALL.md)
+
+   For the first `cmake` command, add some gRPC-related flags so it builds the right stuff.
+
+   ```console
+   $ cmake -DBUILD_TESTING=OFF -DWITH_OTLP=ON -DWITH_OTLP_GRPC=ON ..
+   ```
 
    Make sure your system has `protobuf` and `grpc` installed as described in
    their repositories.
