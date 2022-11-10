@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "opentelemetry/exporters/ostream/span_exporter_factory.h"
+#include "opentelemetry/exporters/otlp/otlp_grpc_exporter_factory.h"
 #include "opentelemetry/sdk/trace/simple_processor_factory.h"
 #include "opentelemetry/sdk/trace/tracer_context_factory.h"
 #include "opentelemetry/sdk/trace/tracer_provider_factory.h"
@@ -61,7 +61,8 @@ public:
 
 void initTracer()
 {
-  auto exporter = opentelemetry::exporter::trace::OStreamSpanExporterFactory::Create();
+  opentelemetry::exporter::otlp::OtlpGrpcExporterOptions opts;
+  auto exporter = opentelemetry::exporter::otlp::OtlpGrpcExporterFactory::Create(opts);
   auto processor =
       opentelemetry::sdk::trace::SimpleSpanProcessorFactory::Create(std::move(exporter));
   std::vector<std::unique_ptr<opentelemetry::sdk::trace::SpanProcessor>> processors;
